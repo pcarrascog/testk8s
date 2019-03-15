@@ -2,7 +2,7 @@
 pipeline {
   agent {
     kubernetes {
-    label "maven-docker-${UUID.randomUUID().toString()}"
+    label "aa-ingesta-${UUID.randomUUID().toString()}"
     yamlFile 'Jenkinsfile.kubernetes.dev.yaml'
     }
   }
@@ -24,7 +24,7 @@ pipeline {
       
     stage('Build Docker Image Base') {
       steps {
-        container('docker'){
+        container('maven'){
           script {
             dir("${env.work}"){
               sh "docker ps"

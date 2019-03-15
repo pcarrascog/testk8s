@@ -1,21 +1,13 @@
----
 apiVersion: v1
 kind: Pod
 spec:
   serviceAccountName: default
   containers:
-  - name: docker
-    image: "docker:stable"
+  - name: maven
+    image: "gcr.io/pipeline-corporativo/maven:jdk-8-alpine"
+    imagePullPolicy: Always
     command:
     - cat
     tty: true
-    volumeMounts:
-    - name: docker-socket
-      mountPath: /var/run/docker.sock
-
-  volumes:
-  - name: docker-socket
-    hostPath:
-      path: /var/run/docker.sock
-  - name: gcr-push-docker-cfg
-
+    securityContext:
+      runAsUser: 10000
