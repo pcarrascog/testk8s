@@ -12,31 +12,10 @@ spec:
     volumeMounts:
     - name: docker-socket
       mountPath: /var/run/docker.sock
-    - name: gcr-push-docker-cfg
-      mountPath: /root
-  - name: kubectl
-    image: "gcr.io/pipeline-corporativo/google-cloud-sdk:alpine-kubectl"
-    imagePullPolicy: Always
-    command:
-    - cat
-    tty: true
-    volumeMounts:
-    - name: gke-deploy-key
-      mountPath: /var/secrets/google
+
   volumes:
   - name: docker-socket
     hostPath:
       path: /var/run/docker.sock
   - name: gcr-push-docker-cfg
-    projected:
-      sources:
-      - secret:
-          name: gcr-push-bc-te-dlake-dev-s7b3
-          items:
-            - key: .dockerconfigjson
-              path: .docker/config.json
-  - name: gke-deploy-key
-    secret:
-      secretName: gke-deploy-bc-te-dlake-dev-s7b3
-  
 

@@ -26,58 +26,14 @@ pipeline {
       steps {
         container('docker'){
           script {
-            dir("${env.work}/base"){
-              image = docker.build("${GC_REGISTRY_HOSTNAME}/${GC_PROJECT_ID_DEV}/${env.IMAGE_NAME}", "-f dockerfile .")
-              image.push()
-              sh "docker rmi -f ${image.id}"
+            dir("${env.work}"){
+              sh "docker ps"
             }
           }
         }
       }
     }
     
-    stage('Build Docker Image Oracle') {
-      steps {
-        container('docker'){
-          script {
-            dir("${env.work}/oracle12") {
-              image = docker.build("${GC_REGISTRY_HOSTNAME}/${GC_PROJECT_ID_DEV}/oracle12", "-f dockerfile .")
-              image.push()
-              sh "docker rmi -f ${image.id}"
-            }
-          }
-        }
-      }
-    }
-    
-
-    stage('Build Docker Image Teradata') {
-      steps {
-        dir("${env.work}/teradata"){
-          container('docker'){
-            script {
-              image = docker.build("${GC_REGISTRY_HOSTNAME}/${GC_PROJECT_ID_DEV}/teradata", "-f dockerfile .")
-              image.push()
-              sh "docker rmi -f ${image.id}"
-            }
-          }
-        }
-      }
-    }
-
-    stage('Build Docker Image MySql') {
-      steps {
-        dir("${env.work}/mysql-client"){
-          container('docker'){
-            script {
-              image = docker.build("${GC_REGISTRY_HOSTNAME}/${GC_PROJECT_ID_DEV}/${env.IMAGE_NAME}", "-f dockerfile .")
-              image.push()
-              sh "docker rmi -f ${image.id}"
-            }
-          }
-        }
-      }
-    }
   }
   post {
     always {
