@@ -2,7 +2,7 @@
 pipeline {
   agent {
     kubernetes {
-    label "aa-ingesta-${UUID.randomUUID().toString()}"
+    label "aa-${UUID.randomUUID().toString()}"
     yamlFile 'Jenkinsfile.kubernetes.dev.yaml'
     }
   }
