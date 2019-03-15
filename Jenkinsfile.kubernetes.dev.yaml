@@ -3,11 +3,15 @@ kind: Pod
 spec:
   serviceAccountName: default
   containers:
-  - name: docker
-    image: "docker:latest"
-    imagePullPolicy: Always
+ - name: docker
+    image: "docker:stable"
     command:
     - cat
     tty: true
-    securityContext:
-      runAsUser: 10000
+    volumeMounts:
+    - name: docker-socket
+      mountPath: /var/run/docker.sock
+  volumes:
+  - name: docker-socket
+    hostPath:
+      path: /var/run/docker.sock
