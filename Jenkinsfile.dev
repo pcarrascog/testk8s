@@ -7,7 +7,7 @@ pipeline {
     yamlFile 'Jenkinsfile.kubernetes.dev.yaml'
     }
   }
-  
+
   environment {
     IMAGE_NAME = 'base'
     GC_REGISTRY_HOSTNAME = 'gcr.io'
@@ -25,7 +25,7 @@ pipeline {
       
     stage('Build Docker Image Base') {
       steps {
-        container('maven'){
+        container('docker'){
           script {
             dir("${env.work}"){
               sh "docker ps"
