@@ -4,7 +4,7 @@ spec:
   serviceAccountName: default
   containers:
   - name: maven
-    image: "gcr.io/pipeline-corporativo/maven:jdk-8-alpine"
+    image: "maven:jdk-8-alpine"
     imagePullPolicy: Always
     command:
     - cat
