@@ -3,7 +3,7 @@ kind: Pod
 spec:
   serviceAccountName: default
   containers:
- - name: docker
+  - name: docker
     image: "docker:stable"
     command:
     - cat
